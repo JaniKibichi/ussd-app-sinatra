@@ -1,0 +1,20 @@
+default: &default
+  adapter: sqlite3
+  pool: 5
+  timeout: 5000
+
+development: 
+  <<: *default
+  database: db/development.sqlite3
+
+test:
+  <<: *default
+  database: db/test.sqlite3
+
+production:
+  adapter: postgresql
+  encoding: unicode
+  host: <%= ENV['DATABASE_HOST'] || 'db' %>
+  database: <% ENV['DATABASE_NAME'] || 'sinatra' %>
+  username: <% ENV['DATABASE_USER'] || 'sinatra' %>
+  password: <% ENV['DATABASE_PASSWORD'] || 'sinatra' %>
